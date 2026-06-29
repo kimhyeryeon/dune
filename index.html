@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dune Wiki</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 엑셀 읽기 -->
+    <script src="xlsx.full.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="container">
+
+    <!-- =======================
+            사이드바
+    ======================== -->
+
+    <aside id="sidebar">
+
+        <div id="logo">
+
+            🏜️ Dune Wiki
+
+        </div>
+
+        <div id="searchArea">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="용어 검색">
+
+            <button id="clearSearch">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div id="toolButtons">
+
+            <button id="randomButton">
+
+                🎲 랜덤
+
+            </button>
+
+        </div>
+
+        <div id="resultCount">
+
+            불러오는 중...
+
+        </div>
+
+        <div id="termList">
+
+        </div>
+
+    </aside>
+
+    <!-- =======================
+            본문
+    ======================== -->
+
+    <main id="viewer">
+
+        <div id="welcome">
+
+            <h1>
+
+                Dune Wiki
+
+            </h1>
+
+            <p>
+
+                왼쪽에서 용어를 선택하세요.
+
+            </p>
+
+        </div>
+
+        <article id="article">
+
+            <h1 id="termTitle">
+
+            </h1>
+
+            <div id="termOrigin">
+
+            </div>
+
+            <div id="termPage">
+
+            </div>
+
+            <hr>
+
+            <div id="termDescription">
+
+            </div>
+
+        </article>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
