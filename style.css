@@ -237,3 +237,29 @@ hr{
     border-top:1px solid #ddd;
 
 }
+
+/* ==========================
+   용어 카드
+========================== */
+
+.termKorean{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#222;
+
+}
+
+.termOriginal{
+
+    margin-top:4px;
+
+    font-size:14px;
+
+    color:#888;
+
+    font-style:italic;
+
+}
