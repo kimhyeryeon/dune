@@ -1,116 +1,78 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dune Wiki</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- 엑셀 읽기 -->
     <script src="xlsx.full.min.js"></script>
-
 </head>
 
 <body>
 
-<div id="container">
+<!-- ==========================
+     목록 화면
+=========================== -->
 
-    <!-- =======================
-            사이드바
-    ======================== -->
+<div id="listPage">
 
-    <aside id="sidebar">
+    <header>
 
-        <div id="logo">
+        <h1>Dune Wiki</h1>
 
-            🏜️ Dune Wiki
-
-        </div>
-
-        <div id="searchArea">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="용어 검색">
-
-            <button id="clearSearch">
-
-                ✕
-
-            </button>
-
-        </div>
-
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="용어를 검색하세요">
 
         <div id="resultCount">
-
-            불러오는 중...
-
+            0개의 용어
         </div>
 
-        <div id="termList">
+    </header>
 
-        </div>
+    <div id="termList">
 
-    </aside>
+    </div>
 
-    <!-- =======================
-            본문
-    ======================== -->
+</div>
 
-    <main id="viewer">
 
-        <div id="welcome">
 
-            <h1>
+<!-- ==========================
+     설명 화면
+=========================== -->
 
-                Dune Wiki
+<div id="articlePage" style="display:none;">
 
-            </h1>
+    <header class="articleHeader">
 
-            <p>
+        <button id="backButton">
+            ← 목록
+        </button>
 
-                왼쪽에서 용어를 선택하세요.
+    </header>
 
-            </p>
+    <main class="article">
 
-        </div>
+        <h2 id="termTitle"></h2>
 
-        <article id="article">
+        <div id="termOrigin"></div>
 
-            <h1 id="termTitle">
+        <div id="termPage"></div>
 
-            </h1>
+        <hr>
 
-            <div id="termOrigin">
-
-            </div>
-
-            <div id="termPage">
-
-            </div>
-
-            <hr>
-
-            <div id="termDescription">
-
-            </div>
-
-        </article>
+        <div id="termDescription"></div>
 
     </main>
 
 </div>
 
+
 <script src="app.js"></script>
 
 </body>
-
 </html>
