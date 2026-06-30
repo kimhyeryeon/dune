@@ -86,10 +86,33 @@ function drawList() {
         const div =
             document.createElement("div");
 
-        div.className = "term";
-
-        div.textContent =
-            item["용어 (원어)"];
+         div.className = "term";
+         
+         const fullName = item["용어 (원어)"] || "";
+         
+         let korean = fullName;
+         let original = "";
+         
+         const match = fullName.match(/^(.*?)\((.*?)\)$/);
+         
+         if(match){
+         
+             korean = match[1].trim();
+         
+             original = match[2].trim();
+         
+         }
+         
+         div.innerHTML = `
+             <div class="termKorean">${korean}</div>
+             <div class="termOriginal">${original}</div>
+         `;
+         
+         div.onclick = function(){
+         
+             showArticle(item);
+         
+         };
 
         div.onclick = function () {
 
