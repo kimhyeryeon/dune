@@ -1,65 +1,99 @@
-/* ==========================
-   Dune Wiki
-   app.js
-========================== */
+/* =====================================
+   Dune Wiki Mobile
+===================================== */
 
 let dictionary = [];
 let filtered = [];
 
-/* 시작 */
-window.onload = function () {
+/* -------------------------------
+   시작
+-------------------------------- */
 
-    loadExcel();
+window.onload = function () {
 
     document
         .getElementById("searchInput")
-        .addEventListener("input", search);
+        .addEventListener("input", searchWord);
+
+    document
+        .getElementById("backButton")
+        .addEventListener("click", showList);
+
+    loadExcel();
 
 };
 
 
-/* 엑셀 읽기 */
+/* -------------------------------
+   엑셀 읽기
+-------------------------------- */
+
 async function loadExcel() {
 
-    const response = await fetch("dune_dictionary.xlsx");
+    try {
 
-    const data = await response.arrayBuffer();
+        const response = await fetch("dune_dictionary.xlsx");
 
-    const workbook = XLSX.read(data, { type: "array" });
+        const data = await response.arrayBuffer();
 
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const workbook = XLSX.read(data, {
+            type: "array"
+        });
 
-    dictionary = XLSX.utils.sheet_to_json(sheet);
+        const sheet =
+            workbook.Sheets[
+                workbook.SheetNames[0]
+            ];
 
-    filtered = dictionary;
+        dictionary =
+            XLSX.utils.sheet_to_json(sheet);
 
-    drawList();
+        filtered = [...dictionary];
+
+        drawList();
+
+    }
+
+    catch (e) {
+
+        alert("엑셀을 읽을 수 없습니다.");
+
+        console.error(e);
+
+    }
 
 }
 
 
-/* 목록 출력 */
+/* -------------------------------
+   목록 출력
+-------------------------------- */
 
 function drawList() {
 
-    const list = document.getElementById("termList");
+    const list =
+        document.getElementById("termList");
 
     list.innerHTML = "";
 
-    document.getElementById("resultCount").textContent =
+    document
+        .getElementById("resultCount")
+        .textContent =
         filtered.length + "개의 용어";
 
     filtered.forEach(item => {
 
-        const div = document.createElement("div");
+        const div =
+            document.createElement("div");
 
         div.className = "term";
 
-        div.textContent = item["용어 (원어)"];
+        div.textContent =
+            item["용어 (원어)"];
 
         div.onclick = function () {
 
-            show(item);
+            showArticle(item);
 
         };
 
@@ -70,62 +104,118 @@ function drawList() {
 }
 
 
-/* 검색 */
+/* -------------------------------
+   검색
+-------------------------------- */
 
-function search() {
+function searchWord() {
 
     const keyword =
         document
-        .getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
 
-    filtered = dictionary.filter(item => {
+    if (keyword === "") {
 
-        return (
+        filtered = [...dictionary];
 
-            String(item["용어 (원어)"])
-            .toLowerCase()
-            .includes(keyword)
+        drawList();
 
-            ||
+        return;
 
-            String(item["정의 및 설명"])
-            .toLowerCase()
-            .includes(keyword)
+    }
 
-            ||
+    filtered =
+        dictionary.filter(item => {
 
-            String(item["페이지"])
-            .includes(keyword)
+            const title =
+                String(
+                    item["용어 (원어)"] || ""
+                ).toLowerCase();
 
-        );
+            const desc =
+                String(
+                    item["정의 및 설명"] || ""
+                ).toLowerCase();
 
-    });
+            const page =
+                String(
+                    item["페이지"] || ""
+                );
+
+            return (
+
+                title.includes(keyword)
+
+                ||
+
+                desc.includes(keyword)
+
+                ||
+
+                page.includes(keyword)
+
+            );
+
+        });
 
     drawList();
 
 }
 
 
-/* 문서 보기 */
+/* -------------------------------
+   설명 보기
+-------------------------------- */
 
-function show(item) {
+function showArticle(item) {
 
-    document.getElementById("welcome").style.display = "none";
+    document
+        .getElementById("listPage")
+        .style.display = "none";
 
-    document.getElementById("article").style.display = "block";
+    document
+        .getElementById("articlePage")
+        .style.display = "flex";
 
-    document.getElementById("termTitle").textContent =
+    document
+        .getElementById("termTitle")
+        .textContent =
         item["용어 (원어)"];
 
-    document.getElementById("termOrigin").textContent =
-        "페이지 : " + item["페이지"];
+    document
+        .getElementById("termOrigin")
+        .textContent =
+        "";
 
-    document.getElementById("termPage").textContent = "";
+    document
+        .getElementById("termPage")
+        .textContent =
+        "페이지 : " +
+        item["페이지"];
 
-    document.getElementById("termDescription").textContent =
+    document
+        .getElementById("termDescription")
+        .textContent =
         item["정의 및 설명"];
+
+}
+
+
+/* -------------------------------
+   목록으로
+-------------------------------- */
+
+function showList() {
+
+    document
+        .getElementById("articlePage")
+        .style.display = "none";
+
+    document
+        .getElementById("listPage")
+        .style.display = "flex";
 
 }
