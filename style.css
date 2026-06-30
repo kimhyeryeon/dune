@@ -86,7 +86,7 @@ header h1{
 
     overflow-y:auto;
 
-    background:white;
+    background:#f5f5f5;
 
 }
 
@@ -94,25 +94,35 @@ header h1{
 
 .term{
 
-    padding:18px;
+    background:white;
 
-    border-bottom:1px solid #e5e5e5;
+    margin:8px 12px;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    border:1px solid #e5e5e5;
 
     cursor:pointer;
 
     transition:.2s;
 
+    box-shadow:0 2px 5px rgba(0,0,0,.05);
+
 }
 
 .term:hover{
 
-    background:#f1f1f1;
+    background:#eef4ff;
+
+    transform:translateY(-2px);
 
 }
 
 .term:active{
 
-    background:#dfe8ff;
+    transform:scale(.98);
 
 }
 
@@ -174,6 +184,8 @@ header h1{
 
     font-size:30px;
 
+    font-weight:bold;
+
     margin-bottom:10px;
 
 }
@@ -194,7 +206,9 @@ header h1{
 
 #termPage{
 
-    color:#888;
+    color:#666;
+
+    font-size:15px;
 
     margin-bottom:20px;
 
@@ -204,11 +218,11 @@ header h1{
 
 #termDescription{
 
+    font-size:19px;
+
+    line-height:1.9;
+
     white-space:pre-wrap;
-
-    line-height:1.8;
-
-    font-size:18px;
 
 }
 
