@@ -203,15 +203,28 @@ function showArticle(item) {
         .getElementById("articlePage")
         .style.display = "flex";
 
-    document
-        .getElementById("termTitle")
-        .textContent =
-        item["용어 (원어)"];
-
-    document
-        .getElementById("termOrigin")
-        .textContent =
-        "";
+   const fullName = item["용어 (원어)"] || "";
+   
+   let korean = fullName;
+   let original = "";
+   
+   const match = fullName.match(/^(.*?)\((.*?)\)$/);
+   
+   if(match){
+   
+       korean = match[1].trim();
+   
+       original = match[2].trim();
+   
+   }
+   
+   document
+       .getElementById("termTitle")
+       .textContent = korean;
+   
+   document
+       .getElementById("termOrigin")
+       .textContent = original;
 
     document
         .getElementById("termPage")
